@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2021 a las 00:31:27
+-- Tiempo de generación: 14-10-2021 a las 00:16:10
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -43,10 +43,7 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
 (8, 'Rol'),
 (9, 'Fillers'),
 (10, 'Party'),
-(20, 'asd'),
-(21, 'matias'),
-(23, 'TCG'),
-(24, 'TCG');
+(27, 'Family');
 
 -- --------------------------------------------------------
 
@@ -58,7 +55,7 @@ CREATE TABLE `juegos` (
   `id_juego` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `precio` double NOT NULL,
-  `descripcion` varchar(100) NOT NULL,
+  `descripcion` varchar(300) NOT NULL,
   `id_categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -70,7 +67,29 @@ INSERT INTO `juegos` (`id_juego`, `nombre`, `precio`, `descripcion`, `id_categor
 (1, 'Monopoly', 7887, 'Esta bueno', 5),
 (3, 'Rising Sun', 24000, 'Ser el clan mas fuerte', 6),
 (4, 'Life', 11000, 'Recrear la vida', 8),
-(5, 'Virus', 2500, 'Detener el virus', 7);
+(5, 'Virus', 2500, 'Detener el virus', 7),
+(17, 'HDP', 2500, 'Para jugar con los panas', 7),
+(18, 'Estanciero', 222, 'adsasda', 8);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `email`, `password`) VALUES
+(1, 'pirula@gmail.com', '$2y$10$fx0OfWHOP.pY6JKWEWrFVO4t3Bh.0YVAr7y2a8j1iOTICaPA47deK'),
+(2, 'matias@gmail.com', '$2y$10$7D9z7EQkAaZCWaHkXl9wyOjyIInm2S9/h0Cmk1htjr4kxtYdARsAC');
 
 --
 -- Índices para tablas volcadas
@@ -90,6 +109,12 @@ ALTER TABLE `juegos`
   ADD KEY `FK_id_categoria` (`id_categoria`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -97,13 +122,19 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id_juego` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_juego` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
