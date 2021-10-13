@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2021 a las 00:16:10
+-- Tiempo de generación: 14-10-2021 a las 00:56:16
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -43,7 +43,7 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
 (8, 'Rol'),
 (9, 'Fillers'),
 (10, 'Party'),
-(27, 'Family');
+(27, 'Familiar');
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ INSERT INTO `juegos` (`id_juego`, `nombre`, `precio`, `descripcion`, `id_categor
 (4, 'Life', 11000, 'Recrear la vida', 8),
 (5, 'Virus', 2500, 'Detener el virus', 7),
 (17, 'HDP', 2500, 'Para jugar con los panas', 7),
-(18, 'Estanciero', 222, 'adsasda', 8);
+(18, 'Estanciero', 2500, 'Esta muy bueno', 27);
 
 -- --------------------------------------------------------
 
