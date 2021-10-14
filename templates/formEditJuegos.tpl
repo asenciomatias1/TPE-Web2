@@ -1,6 +1,6 @@
 {include file="templates/header.tpl"}
 
-    <form action="admin/juegos/editar" method="post">
+    {* <form action="admin/juegos/editar" method="post">
         <p>Juego a editar: {$nombreJuego}</p>
         <p>Precio: <input type="text" name="precioJuego"></p>
         <p>Descripcion: <input type="text" name="descJuego"></p>
@@ -17,7 +17,7 @@
             <a href="admin/juegos/editar/{$juego->nombre}" class="btn btn-success">Editar</a>
         </li>
     {/foreach}
-    </ul>
+    </ul> *}
 
     <div class="content-admin">
         <div class="login-form">
