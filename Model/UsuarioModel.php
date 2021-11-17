@@ -17,5 +17,16 @@
             $query->execute(array($email));
             return $query->fetch(PDO::FETCH_OBJ);
         }
+
+        function getUsuarios(){
+            $query = $this->db->prepare('SELECT * FROM usuarios');
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        function editarPermisos($email, $permiso){
+            $query = $this->db->prepare("UPDATE `usuarios` SET `email`='?',`rol`='?'");
+            $query->execute(array($email, $permiso));
+        }
     
     }

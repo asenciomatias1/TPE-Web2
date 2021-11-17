@@ -2,7 +2,7 @@
 
     <div class="content">
             <div class="links">
-        
+
                 <p><a href="juegos/todos">Ver todos los juegos</a></p>
             
                 <p><a href="categorias">Ver todas las categorias</a></p>

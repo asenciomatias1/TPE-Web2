@@ -1,4 +1,4 @@
-{include file="templates/header.tpl"}
+    {include file="templates/header.tpl"}
 
 {*     <form action="admin/juegos/agregar" method="post">
         <p>Nombre del juego: <input type="text" name="nombreJuego"></p>

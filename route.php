@@ -2,7 +2,9 @@
     require_once "./Controller/JuegosController.php";
     require_once "./Controller/CategoriasController.php";
     require_once "./Controller/LoginController.php";
+    require_once "./Controller/UsuarioController.php";
     require_once "./Helpers/AuthHelper.php";
+    require_once "./Helpers/AdminHelper.php";
 
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -21,6 +23,8 @@
     $juegosController = new JuegosController();
     $categoriasController = new CategoriasController();
     $loginController = new LoginController();
+    $usuarioController = new UsuarioController();
+    $adminHelper = new AdminHelper();
     $authHelper = new AuthHelper();
 
     switch ($params[0]) {
@@ -73,7 +77,6 @@
                             case 'error':
                                 $categoriasController->formAddCategorias("No se puede borrar: la categoria tiene juegos asociados");
                                 break;
-        
                             default:
                                 //$categoriasController->formAddCategorias();
                                 break;
@@ -109,6 +112,22 @@
                         
                     }else {
                         $juegosController->formAddJuegos($categoriasController->getCategorias());
+                    }
+                }else if($params[1] == 'permisos'){
+                    if (!empty($params[2])){
+                        switch ($params[2]) {
+                            case 'editar':
+                                //admin/permisos/editar/id me lleva a la interfaz para editar un usuario
+                                break;
+                            case 'borrar':
+                                //admin/permisos/borrar/id borrar un usuario
+                                break;
+                            default:
+                                # code...
+                                break;
+                        }
+                    }else{
+                        $usuarioController->updatePermisosInterfaz();
                     }
                 }
             }else {
