@@ -22,11 +22,26 @@
             if (!empty($_POST)){
                 $user = $_POST['emailUsuario'];
                 $pass = $_POST['passUsuario'];
-                $hash = password_hash($pass, PASSWORD_DEFAULT);
-                $this->model->addUsuario($user, $hash);
-                //$this->view->showAdmin();
-                $this->verifyLogin();
+                if (!$this->existeUsuario($user)){
+                    $hash = password_hash($pass, PASSWORD_DEFAULT);
+                    $this->model->addUsuario($user, $hash);
+                    $this->verifyLogin();
+                }else {
+                    $this->view->showLogin("Ya existe un usuario con ese e-mail");
+                }
             }
+        }
+
+        function existeUsuario($email){
+            $usuarios = $this->model->getUsuarios();
+            $existe = false;
+            foreach ($usuarios as $usuario) {
+                if ($usuario->email == $email){
+                    $existe = true;
+                }
+            }
+
+            return $existe;
         }
 
         function showLogin(){

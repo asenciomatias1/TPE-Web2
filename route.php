@@ -122,10 +122,14 @@
                                 $usuarioController->editarRol();
                                 break;
                             case 'borrar':
-                                //admin/permisos/borrar/id borrar un usuario
+                                if (!empty($params[3])){
+                                    $usuarioController->borrarUsuario($params[3]);
+                                }else {
+                                    $usuarioController->updatePermisosInterfaz();
+                                }
                                 break;
                             default:
-                                # code...
+                                $usuarioController->updatePermisosInterfaz();
                                 break;
                         }
                     }else{

@@ -29,4 +29,8 @@
             $query->execute(array($permiso, $email));
         }
     
+        function borrarUsuario($id){
+            $query = $this->db->prepare("DELETE FROM `usuarios` WHERE id = ?");
+            $query->execute(array($id));
+        }
     }

@@ -31,4 +31,11 @@
             $this->updatePermisosInterfaz();
         }
 
+        function borrarUsuario($id){
+            if (!empty($id)){
+                $this->model->borrarUsuario($id);
+            }
+            $this->updatePermisosInterfaz();
+        }
+
 }
