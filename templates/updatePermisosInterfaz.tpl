@@ -1,22 +1,28 @@
 {include file="templates/header.tpl"}
 
-<div class="content-admin">
+    <div class="content-admin">
         <div class="login-form">
-            <form action="categorias/permisos" method="post">
+            <form action="admin/permisos/editar" method="post">
                 <h2 class="text-center">Administrar permisos</h2>       
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Email del usuario" 
-                    required="required" name="emailUsuario">
-
-                    <input type="text" class="form-control" placeholder="Permisos" 
-                    required="required" name="permisoUsuario">
+                    <h3>E-mail</h3>
+                    <select class="form-select form-select-sm" name="emailUsuario">
+                        {foreach from=$usuarios item=$usuario}
+                            <option value="{$usuario->email}">{$usuario->email}</option>
+                        {/foreach}
+                    </select>
+                    <h3>Rol</h3>
+                    <select class="form-select form-select-sm" name="rolUsuario">
+                        <option value="usuario">Usuario</option>
+                        <option value="admin">Admin</option>
+                    </select>
 
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-dark btn-block">Editar</button>
                 </div>
             </form>
-        </div>
+        </div> 
         
 
         <div class="table-box">
@@ -26,7 +32,6 @@
                     <th>USUARIO</th>
                     <th>PERMISO</th>
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +40,6 @@
                         <td>{$usuario->email}</td>
                         <td>{$usuario->rol}</td>
                         <td><a href="admin/permisos/borrar/{$usuario->id}" class="btn btn-black">Borrar usuario</a></td>
-                        <td><a href="admin/permisos/editar/{$usuario->id}" class="btn btn-black">Editar permisos</a></td>
                     </tr>
                 {/foreach}
             </tbody> 

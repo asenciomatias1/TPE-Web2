@@ -24,9 +24,9 @@
             return $query->fetchAll(PDO::FETCH_OBJ);
         }
 
-        function editarPermisos($email, $permiso){
-            $query = $this->db->prepare("UPDATE `usuarios` SET `email`='?',`rol`='?'");
-            $query->execute(array($email, $permiso));
+        function editarPermiso($email, $permiso){
+            $query = $this->db->prepare("UPDATE `usuarios` SET `rol`= ? WHERE email = ?");
+            $query->execute(array($permiso, $email));
         }
     
     }

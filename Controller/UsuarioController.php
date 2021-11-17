@@ -21,4 +21,14 @@
             $usuarios = $this->model->getUsuarios();
             $this->view->updatePermisosInterfaz($usuarios);
         }
+
+        function editarRol(){
+            $email = $_POST['emailUsuario'];
+            $rol = $_POST['rolUsuario'];
+            if (!empty($email) && !empty($rol)){
+                $this->model->editarPermiso($email, $rol);
+            }
+            $this->updatePermisosInterfaz();
+        }
+
 }

@@ -24,7 +24,8 @@
                 $pass = $_POST['passUsuario'];
                 $hash = password_hash($pass, PASSWORD_DEFAULT);
                 $this->model->addUsuario($user, $hash);
-                $this->view->showHome();
+                //$this->view->showAdmin();
+                $this->verifyLogin();
             }
         }
 

@@ -118,6 +118,8 @@
                         switch ($params[2]) {
                             case 'editar':
                                 //admin/permisos/editar/id me lleva a la interfaz para editar un usuario
+                                //$usuarioController->updatePermisosInterfaz();
+                                $usuarioController->editarRol();
                                 break;
                             case 'borrar':
                                 //admin/permisos/borrar/id borrar un usuario
