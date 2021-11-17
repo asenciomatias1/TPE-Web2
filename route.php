@@ -4,7 +4,6 @@
     require_once "./Controller/LoginController.php";
     require_once "./Controller/UsuarioController.php";
     require_once "./Helpers/AuthHelper.php";
-    require_once "./Helpers/AdminHelper.php";
 
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -24,7 +23,6 @@
     $categoriasController = new CategoriasController();
     $loginController = new LoginController();
     $usuarioController = new UsuarioController();
-    $adminHelper = new AdminHelper();
     $authHelper = new AuthHelper();
 
     switch ($params[0]) {

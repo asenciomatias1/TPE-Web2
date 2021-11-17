@@ -3,6 +3,8 @@
 
     class LoginView{
 
+        private $smarty;
+
         function __construct(){
             $this->smarty = new Smarty();
         }
@@ -20,7 +22,8 @@
             header("Location: ".BASE_URL."home");
         }
 
-        function showAdmin(){
+        function showAdmin($error = ''){
+            $this->smarty->assign('error', $error);
             $this->smarty->display('templates/admin.tpl');
         }
 

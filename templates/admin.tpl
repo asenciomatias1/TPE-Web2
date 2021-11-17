@@ -2,6 +2,8 @@
 
     <div class="content">
         <div class="links">
+            <p class="alert-danger error-login">{$error}</p>
+
             <h2>Panel Administrativo</h2>
 
             <p><a href="juegos/todos">Ver todos los juegos</a></p>

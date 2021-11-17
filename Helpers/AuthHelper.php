@@ -21,5 +21,10 @@
                 return true;
             }
         }
+
+        function esAdmin(){
+            //session_start();
+            return $_SESSION['rol'] == "admin";
+        }
     }
     
