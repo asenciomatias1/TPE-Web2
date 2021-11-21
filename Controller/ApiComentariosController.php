@@ -29,6 +29,12 @@
             }
         }
 
+        function getComentariosPorJuego($params = null){
+            $idJuego = $params[":ID"];
+            $comentarios = $this->model->getComentariosPorJuego($idJuego);
+            return $this->view->response($comentarios, 200);
+        }
+
         function postComentario(){
             $body = $this->getData(); // parsea la data raw a JSON objec
 

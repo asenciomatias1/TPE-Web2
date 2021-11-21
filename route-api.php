@@ -34,6 +34,7 @@ Actualizar Vuelo (recurso vuelo)
 // define la tabla de ruteo
 $router->addRoute('comentarios', 'GET', 'ApiComentariosController', 'getComentarios');
 $router->addRoute('comentarios/:ID', 'GET', 'ApiComentariosController', 'getComentario');
+$router->addRoute('comentarios/juegos/:ID', 'GET', 'ApiComentariosController', 'getComentariosPorJuego');
 $router->addRoute('comentarios/:ID', 'DELETE', 'ApiComentariosController', 'deleteComentario');
 $router->addRoute('comentarios', 'POST', 'ApiComentariosController', 'postComentario');
 

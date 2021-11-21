@@ -40,4 +40,19 @@
             $query = $this->db->prepare("DELETE FROM comentarios WHERE id_comentario = ?");
             $query->execute(array($idComentario));
         }
+
+        function getComentariosPorJuego($idJuego){
+            $query = $this->db->prepare(
+                "SELECT comentarios.*,
+                usuarios.email AS email_usuario
+                FROM comentarios
+                JOIN usuarios
+                ON comentarios.fk_id_usuario = usuarios.id
+                JOIN juegos
+                ON comentarios.fk_id_juego = juegos.id_juego
+                WHERE fk_id_juego = ?");
+
+            $query->execute(array($idJuego));
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        }
     }
