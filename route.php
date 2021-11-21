@@ -16,7 +16,6 @@
         $action = "home";
     };
   
-    $nombreCategoria = "TCG";
     $params = explode('/', $action);
 
     $juegosController = new JuegosController();
@@ -27,10 +26,7 @@
 
     switch ($params[0]) {
         case 'home':
-            //$categoriasController->formCategorias();
             $juegosController->showHome();
-            //$categoriasController->formDeleteCategoria();
-            //$controller->showJuegosPorCategoria($nombreCategoria);
             break;
 
         case 'categorias':
