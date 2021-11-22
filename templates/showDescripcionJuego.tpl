@@ -37,21 +37,21 @@
         </div>
     </div>
 
-        <form action="hola.html" method="post" class="form-comentarios">
+        <form class="form-comentarios">
             <div class="card">
                 <div class="row">
                     <div class="col-10">
                         <div class="comment-box ml-2">
                             <h4>Dejanos tu review</h4>
                             <div class="rating">
-                                <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-                                <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
-                                <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-                                <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-                                <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                                <input type="radio" name="rating" value="5" id="5"><label for="5" required="required">☆</label>
+                                <input type="radio" name="rating" value="4" id="4"><label for="4" required="required">☆</label>
+                                <input type="radio" name="rating" value="3" id="3"><label for="3" required="required">☆</label>
+                                <input type="radio" name="rating" value="2" id="2"><label for="2" required="required">☆</label>
+                                <input type="radio" name="rating" value="1" id="1"><label for="1" required="required">☆</label>
                             </div>
                             <div class="comment-area">
-                                <textarea class="form-control" placeholder="¿Que pensas del juego?" rows="4"></textarea>
+                                <textarea class="form-control" placeholder="¿Que pensas del juego?" rows="4" required="required"></textarea>
                             </div>
                             <div class="comment-btns mt-2">
                                 <div class="row">

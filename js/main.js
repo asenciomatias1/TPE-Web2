@@ -2,6 +2,12 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     cargarComentarios();
+    pruebaForm();
+    let form = document.querySelector(".form-comentarios");
+    form.addEventListener("submit", function (e){
+        e.preventDefault();
+        pruebaForm();
+    })
 });
 
 const API_URL = "http://localhost/proyectos/WEB%202/tpeParte1/TPE-Web2/api/comentarios/";
@@ -52,10 +58,7 @@ async function imprimeArreglo(){
 
 async function cargarComentarios(){
     let link = document.querySelector("#link-juego");
-    //console.log(link.dataset.id);
     let comentarios = await getComentariosApiPorJuego(link.dataset.id);
-    console.log(comentarios);
-    console.log(comentarios.length);
 
     if (comentarios.length){
         console.log("entro al .length");
@@ -63,12 +66,29 @@ async function cargarComentarios(){
         console.log("llego hasta cargar comentarios");
     }
 
-    let borrar = document.querySelectorAll(".btn-borrar-comentario");
-    console.log(borrar);
+    // Agrego los listeners para los botones borrar
+    let botonesBorrar = document.querySelectorAll(".btn-borrar-comentario");
+    agregaListenersBorrar(botonesBorrar);
+}
+
+function agregaListenersBorrar(botones){
+    for (const boton of botones) {
+        //boton.addEventListener("click", deleteComentarioApi);
+        boton.addEventListener("click", deleteComentarioApi);
+        boton.addEventListener("click", recargarComentarios);
+    }
+}
+
+function recargarComentarios(){
+    //deleteComentarioApi();
+    let containerMensajes = document.querySelector(".comment-widgets");
+    containerMensajes.innerHTML = "";
+    cargarComentarios();
 }
 
 function imprimeComentarios(comentarios){
     let containerMensajes = document.querySelector(".comment-widgets");
+    //containerMensajes.innerHTML = "";
     
     for (const comentario of comentarios) {
         let mensaje = creaComentario(comentario);
@@ -94,4 +114,33 @@ function creaComentario(comentario){
     return mensaje;
 }
 
+async function deleteComentarioApi() {
+    let idComentario = this.dataset.idComentario;
+    try {
+        let respuesta = await fetch(API_URL + idComentario, {
+            "method": "DELETE"
+        })
+        if (respuesta.ok){
+            console.log("Borrado exitoso con 200");
+        }else if (respuesta.status == 201){
+            console.log("Borrado exitoso con 201");
+        }else{
+            console.log("Hubo un error: " + respuesta.status);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
+function pruebaForm(){
+    let form = document.querySelector(".form-comentarios");
+    let elementosForm = form.elements;
+    let puntaje = 1;
+    for (const estrella of elementosForm["rating"]) {
+        if (estrella.checked){
+            puntaje = estrella.value;
+        }
+    }
+    console.log(puntaje);
+    form.reset();
+}
