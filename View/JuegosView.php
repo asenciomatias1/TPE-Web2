@@ -17,8 +17,11 @@
             $this->smarty->display('templates/showJuegos.tpl');
         }
 
-        function showDescripcionJuego($juego){
+        function showDescripcionJuego($juego, $estaLogeado, $esAdmin, $idUsuario){
             $this->smarty->assign('juego', $juego);
+            $this->smarty->assign('estaLogeado', $estaLogeado);
+            $this->smarty->assign('esAdmin', $esAdmin);
+            $this->smarty->assign('idUsuario', $idUsuario);
             $this->smarty->display('templates/showDescripcionJuego.tpl');
         }
 

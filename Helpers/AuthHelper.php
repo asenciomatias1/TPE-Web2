@@ -26,5 +26,14 @@
             //session_start();
             return $_SESSION['rol'] == "admin";
         }
+
+        function idUsuarioLogeado(){
+            //session_start();
+            if(!isset($_SESSION["idUsuario"])){
+                return "0";
+            }else {
+                return $_SESSION["idUsuario"];
+            }
+        }
     }
     

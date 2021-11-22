@@ -62,6 +62,7 @@
                     session_start();
                     $_SESSION["email"] = $email;
                     $_SESSION["rol"] = $user->rol;
+                    $_SESSION["idUsuario"] = $user->id;
 
                     //$this->view->showAdmin();
                     $this->view->redirAdmin();

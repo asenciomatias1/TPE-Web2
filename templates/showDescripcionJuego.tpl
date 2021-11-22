@@ -10,7 +10,15 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><a href="juegos/{$juego->id_juego}" id="link-juego" data-id="{$juego->id_juego}">{$juego->nombre}</a></td>
+                    {if $estaLogeado}
+                        {if $esAdmin}
+                            <td><a href="juegos/{$juego->id_juego}" id="link-juego" data-id-juego="{$juego->id_juego}" data-esta-logeado="true" data-es-admin="true">{$juego->nombre}</a></td>
+                        {else}
+                            <td><a href="juegos/{$juego->id_juego}" id="link-juego" data-id-juego="{$juego->id_juego}" data-esta-logeado="true" data-es-admin="false">{$juego->nombre}</a></td>
+                        {/if}
+                    {else}
+                        <td><a href="juegos/{$juego->id_juego}" id="link-juego" data-id-juego="{$juego->id_juego}" data-esta-logeado="false">{$juego->nombre}</a></td>
+                    {/if}
                     <td>{$juego->descripcion}</td>
                 </tr>
             </tbody>
@@ -27,17 +35,19 @@
                 <div class="comment-text w-100">
                     <h6 class="font-medium nombre-usuario">matias@gmail.com dice:</h6>
                     <span class="m-b-15 d-block">Comentario de prueba renderizado desde el servidor</span>
+                    {if $estaLogeado && $esAdmin}
                     <div class="comment-footer">
                         <button type="button" class="btn btn-danger btn-sm" disabled>Delete</button>
                     </div>
+                    {/if}
                 </div>
 
             </div>
             
         </div>
     </div>
-
-        <form class="form-comentarios">
+        {if $estaLogeado}
+        <form class="form-comentarios" data-id-usuario="{$idUsuario}" data-id-juego="{$juego->id_juego}">
             <div class="card">
                 <div class="row">
                     <div class="col-10">
@@ -72,6 +82,7 @@
                 </div>
             </div>
         </form>
+        {/if}
     </div>
 
     <script src="js/main.js"></script>

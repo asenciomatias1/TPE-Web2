@@ -3,11 +3,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     cargarComentarios();
     pruebaForm();
-    let form = document.querySelector(".form-comentarios");
-    form.addEventListener("submit", function (e){
-        e.preventDefault();
-        pruebaForm();
-    })
+    //let form = document.querySelector(".form-comentarios");
+    //form.addEventListener("submit", function (e){
+    //    e.preventDefault();
+    //    pruebaForm();
+    //})
 });
 
 const API_URL = "http://localhost/proyectos/WEB%202/tpeParte1/TPE-Web2/api/comentarios/";
@@ -58,7 +58,7 @@ async function imprimeArreglo(){
 
 async function cargarComentarios(){
     let link = document.querySelector("#link-juego");
-    let comentarios = await getComentariosApiPorJuego(link.dataset.id);
+    let comentarios = await getComentariosApiPorJuego(link.dataset.idJuego);
 
     if (comentarios.length){
         console.log("entro al .length");
@@ -98,8 +98,14 @@ function imprimeComentarios(comentarios){
 }
 
 function creaComentario(comentario){
+    let link = document.querySelector("#link-juego");
+    let estaLogeado = link.dataset.estaLogeado;
+    let esAdmin = link.dataset.esAdmin;
+
     let mensaje = document.createElement('div');
-    mensaje.innerHTML = `<div class="d-flex flex-row comment-row m-t-0">
+
+    if (estaLogeado === "true" && esAdmin === "true"){
+        mensaje.innerHTML = `<div class="d-flex flex-row comment-row m-t-0">
 
                             <div class="comment-text w-100">
                                 <h6 class="font-medium nombre-usuario">${comentario.email_usuario} dice:</h6>
@@ -108,8 +114,22 @@ function creaComentario(comentario){
                                     <button type="button" class="btn btn-danger btn-sm btn-borrar-comentario" data-id-comentario="${comentario.id_comentario}">Delete</button>
                                 </div>
                             </div>
+    
+                        </div>`;
+    }else {
+        mensaje.innerHTML = `<div class="d-flex flex-row comment-row m-t-0">
+
+                            <div class="comment-text w-100">
+                                <h6 class="font-medium nombre-usuario">${comentario.email_usuario} dice:</h6>
+                                <span class="m-b-15 d-block">${comentario.mensaje}</span>
+                                
+                            </div>
 
                         </div>`;
+    }
+
+    
+    
 
     return mensaje;
 }
@@ -132,15 +152,19 @@ async function deleteComentarioApi() {
     }
 }
 
+
 function pruebaForm(){
     let form = document.querySelector(".form-comentarios");
-    let elementosForm = form.elements;
-    let puntaje = 1;
-    for (const estrella of elementosForm["rating"]) {
-        if (estrella.checked){
-            puntaje = estrella.value;
+    if (form){
+        let elementosForm = form.elements;
+        let puntaje = 1;
+        for (const estrella of elementosForm["rating"]) {
+            if (estrella.checked){
+                puntaje = estrella.value;
+            }
         }
+        console.log(puntaje);
+        form.reset();
     }
-    console.log(puntaje);
-    form.reset();
+    
 }
