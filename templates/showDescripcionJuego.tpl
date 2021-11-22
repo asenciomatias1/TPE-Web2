@@ -76,11 +76,7 @@
                             </div>
                             <div class="comment-btns mt-2">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <div class="pull-left">
-                                            <button class="btn btn-success cancel btn-sm">Cancel</button>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col-6">
                                         <div class="pull-right">
                                             <button class="btn btn-success send btn-sm">Send <i class="fa fa-long-arrow-right ml-1"></i></button>
