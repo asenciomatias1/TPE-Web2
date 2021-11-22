@@ -10,7 +10,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><a href="juegos/{$juego->id_juego}">{$juego->nombre}</a></td>
+                    <td><a href="juegos/{$juego->id_juego}" id="link-juego" data-id="{$juego->id_juego}">{$juego->nombre}</a></td>
                     <td>{$juego->descripcion}</td>
                 </tr>
             </tbody>
@@ -25,9 +25,10 @@
             <div class="d-flex flex-row comment-row m-t-0">
 
                 <div class="comment-text w-100">
-                    <h6 class="font-medium nombre-usuario">matias@gmail.com dice:</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium modi magni, error nam vero eos dolore iure reprehenderit fugiat. Culpa aliquam sunt asperiores eligendi neque? Cum alias distinctio mollitia numquam?</span>
+                    <h6 class="font-medium nombre-usuario">matias@gmail.com dice:</h6>
+                    <span class="m-b-15 d-block">Comentario de prueba renderizado desde el servidor</span>
                     <div class="comment-footer">
-                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                        <button type="button" class="btn btn-danger btn-sm" disabled>Delete</button>
                     </div>
                 </div>
 
@@ -73,4 +74,5 @@
         </form>
     </div>
 
+    <script src="js/main.js"></script>
 {include file="footer.tpl"}

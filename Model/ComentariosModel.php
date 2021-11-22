@@ -24,9 +24,18 @@
         }
 
         function getComentario($id){
-            $query = $this->db->prepare("SELECT * FROM comentarios WHERE id_comentario = ?");
+            $query = $this->db->prepare(
+                "SELECT comentarios.*,
+                usuarios.email AS email_usuario,
+                juegos.nombre AS nombre_juego
+                FROM comentarios
+                JOIN usuarios
+                ON comentarios.fk_id_usuario = usuarios.id
+                JOIN juegos
+                ON comentarios.fk_id_juego = juegos.id_juego
+                WHERE id_comentario = ?");
             $query->execute(array($id));
-            return $query->fetch(PDO::FETCH_OBJ);
+            return $query->fetchAll(PDO::FETCH_OBJ);
         }
 
         function addComentario($mensaje, $puntaje, $idJuego, $idUsuario){
