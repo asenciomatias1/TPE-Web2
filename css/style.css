@@ -238,6 +238,14 @@ body{
     cursor: pointer
 }
 
+.star {
+    position: relative;
+    width: 19px;
+    font-size: 25px;
+    color: #ffc700;
+    opacity: 1 !important;
+}
+
 .rating>label::before {
     content: "\2605";
     position: absolute;
@@ -337,4 +345,18 @@ body{
 
 .comment-widgets .comment-row:hover {
     background: rgba(0, 0, 0, 0.05);
+}
+
+.mensaje-box{
+    display: block;
+}
+
+.rating-mensaje{
+    display: flex;
+    flex-direction: column;
+}
+
+.rating-box{
+    display: flex;
+    padding: 0px;
 }

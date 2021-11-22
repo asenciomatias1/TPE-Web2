@@ -34,7 +34,18 @@
 
                 <div class="comment-text w-100">
                     <h6 class="font-medium nombre-usuario">matias@gmail.com dice:</h6>
-                    <span class="m-b-15 d-block">Comentario de prueba renderizado desde el servidor</span>
+                    <div class="rating-mensaje">
+                        <div class="rating-box">
+                            <div class="star">★</div>
+                            <div class="star">★</div>
+                            <div class="star">★</div>
+                            <div class="star">★</div>
+                            <div class="star">★</div>
+                        </div>
+                        <div class="mensaje-box">
+                            <p class="m-b-15 d-block">Comentario de prueba renderizado desde el servidor</p>
+                        </div>
+                    </div>
                     {if $estaLogeado && $esAdmin}
                     <div class="comment-footer">
                         <button type="button" class="btn btn-danger btn-sm" disabled>Delete</button>
@@ -61,7 +72,7 @@
                                 <input type="radio" name="rating" value="1" id="1"><label for="1" required="required">☆</label>
                             </div>
                             <div class="comment-area">
-                                <textarea class="form-control" placeholder="¿Que pensas del juego?" rows="4" required="required"></textarea>
+                                <textarea class="form-control" name="mensaje-comentario" placeholder="¿Que pensas del juego?" rows="4" required="required"></textarea>
                             </div>
                             <div class="comment-btns mt-2">
                                 <div class="row">

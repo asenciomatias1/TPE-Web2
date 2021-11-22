@@ -2,17 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     cargarComentarios();
-    pruebaForm();
-    //let form = document.querySelector(".form-comentarios");
-    //form.addEventListener("submit", function (e){
-    //    e.preventDefault();
-    //    pruebaForm();
-    //})
+    agregaListenerFormComentarios();
 });
 
 const API_URL = "http://localhost/proyectos/WEB%202/tpeParte1/TPE-Web2/api/comentarios/";
-
-console.log("esta funcionando js");
 
 async function getComentariosApi() {
     try {
@@ -44,6 +37,16 @@ async function getComentariosApiPorJuego(idJuego) {
     }
 }
 
+function agregaListenerFormComentarios(){
+    let form = document.querySelector(".form-comentarios");
+    if (form){
+        form.addEventListener("submit", function (e){
+            e.preventDefault();
+            actionFormComentarios();
+        })
+    }
+}
+
 async function imprimeArreglo(){
     let prueba = await getComentariosApi();
     
@@ -61,9 +64,7 @@ async function cargarComentarios(){
     let comentarios = await getComentariosApiPorJuego(link.dataset.idJuego);
 
     if (comentarios.length){
-        console.log("entro al .length");
         imprimeComentarios(comentarios);
-        console.log("llego hasta cargar comentarios");
     }
 
     // Agrego los listeners para los botones borrar
@@ -74,9 +75,15 @@ async function cargarComentarios(){
 function agregaListenersBorrar(botones){
     for (const boton of botones) {
         //boton.addEventListener("click", deleteComentarioApi);
-        boton.addEventListener("click", deleteComentarioApi);
-        boton.addEventListener("click", recargarComentarios);
+        boton.addEventListener("click", borrarComentario);
+        //boton.addEventListener("click", recargarComentarios);
     }
+}
+
+async function borrarComentario(){
+    let idComentario = this.dataset.idComentario;
+    await deleteComentarioApi(idComentario);
+    recargarComentarios();
 }
 
 function recargarComentarios(){
@@ -97,19 +104,37 @@ function imprimeComentarios(comentarios){
 
 }
 
+function calculaStringPuntaje(puntaje){
+    let stringPuntaje = "";
+    for (let i = 0; i < puntaje; i++) {
+        stringPuntaje += `<div class="star">★</div>`;
+    }
+
+    return stringPuntaje;
+}
+
 function creaComentario(comentario){
     let link = document.querySelector("#link-juego");
     let estaLogeado = link.dataset.estaLogeado;
     let esAdmin = link.dataset.esAdmin;
 
     let mensaje = document.createElement('div');
+    let puntajeHtml = calculaStringPuntaje(comentario.puntaje);
+    console.log(puntajeHtml);
 
     if (estaLogeado === "true" && esAdmin === "true"){
         mensaje.innerHTML = `<div class="d-flex flex-row comment-row m-t-0">
 
                             <div class="comment-text w-100">
                                 <h6 class="font-medium nombre-usuario">${comentario.email_usuario} dice:</h6>
-                                <span class="m-b-15 d-block">${comentario.mensaje}</span>
+                                <div class="rating-mensaje">
+                                    <div class="rating-box">
+                                        ${puntajeHtml}
+                                    </div>
+                                    <div class="mensaje-box">
+                                        <p class="m-b-15 d-block">${comentario.mensaje}</p>
+                                    </div>
+                                </div>
                                 <div class="comment-footer">
                                     <button type="button" class="btn btn-danger btn-sm btn-borrar-comentario" data-id-comentario="${comentario.id_comentario}">Delete</button>
                                 </div>
@@ -128,14 +153,10 @@ function creaComentario(comentario){
                         </div>`;
     }
 
-    
-    
-
     return mensaje;
 }
 
-async function deleteComentarioApi() {
-    let idComentario = this.dataset.idComentario;
+async function deleteComentarioApi(idComentario) {
     try {
         let respuesta = await fetch(API_URL + idComentario, {
             "method": "DELETE"
@@ -152,8 +173,27 @@ async function deleteComentarioApi() {
     }
 }
 
+async function agregarComentarioApi(objeto) {
+    try {
+        let respuesta = await fetch(API_URL, {
+            "method": "POST",
+            "headers": {"Content-Type": "application/json"},
+            "body": JSON.stringify(objeto)
+        })
+        if (respuesta.ok){
+            console.log("Se agrego exitosamente con 200");
 
-function pruebaForm(){
+        }else if (respuesta.status == 201){
+            console.log("Se agrego exitosamente con 201");
+        }else{
+            console.log("Hubo un error: " + respuesta.status);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function actionFormComentarios(){
     let form = document.querySelector(".form-comentarios");
     if (form){
         let elementosForm = form.elements;
@@ -163,8 +203,31 @@ function pruebaForm(){
                 puntaje = estrella.value;
             }
         }
-        console.log(puntaje);
+        let mensaje = elementosForm["mensaje-comentario"].value;
+        let idUsuario = form.dataset.idUsuario;
+        let idJuego = form.dataset.idJuego;
+
+        // Creo un objeto con los datos del comentario
+        let comentario = crearObjetoComentario(mensaje, puntaje, idJuego, idUsuario);
+
+        // Mando ese comentario a la API con POST
+        await agregarComentarioApi(comentario);
+
+        // Limpio la lista de comentarios y los recargo con GET
+        recargarComentarios();
+
+        // Limpio los inputs
         form.reset();
     }
-    
+}
+
+function crearObjetoComentario(mensaje, puntaje, idJuego, idUsuario){
+    let comentario = {
+        "mensaje": mensaje,
+        "puntaje": puntaje,
+        "fk_id_juego": idJuego,
+        "fk_id_usuario": idUsuario
+    }
+
+    return comentario;
 }
