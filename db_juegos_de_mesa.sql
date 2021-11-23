@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2021 a las 00:56:16
+-- Tiempo de generación: 24-11-2021 a las 00:57:33
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -48,6 +48,31 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_comentario` int(11) NOT NULL,
+  `mensaje` varchar(300) NOT NULL,
+  `puntaje` int(5) NOT NULL,
+  `fk_id_juego` int(11) NOT NULL,
+  `fk_id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_comentario`, `mensaje`, `puntaje`, `fk_id_juego`, `fk_id_usuario`) VALUES
+(2, 'Comentario prueba 2', 5, 17, 3),
+(46, 'pirula comentando 23/11', 3, 1, 5),
+(47, 'soy admin', 1, 1, 3),
+(48, 'prueba btn sin success', 3, 1, 3),
+(49, 'asdasdasd', 2, 1, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `juegos`
 --
 
@@ -64,12 +89,11 @@ CREATE TABLE `juegos` (
 --
 
 INSERT INTO `juegos` (`id_juego`, `nombre`, `precio`, `descripcion`, `id_categoria`) VALUES
-(1, 'Monopoly', 7887, 'Esta bueno', 5),
+(1, 'Monopoly', 5500, 'Convertite en millonario', 27),
 (3, 'Rising Sun', 24000, 'Ser el clan mas fuerte', 6),
 (4, 'Life', 11000, 'Recrear la vida', 8),
 (5, 'Virus', 2500, 'Detener el virus', 7),
-(17, 'HDP', 2500, 'Para jugar con los panas', 7),
-(18, 'Estanciero', 2500, 'Esta muy bueno', 27);
+(17, 'HDP', 2500, 'Para jugar con los panas', 7);
 
 -- --------------------------------------------------------
 
@@ -80,6 +104,7 @@ INSERT INTO `juegos` (`id_juego`, `nombre`, `precio`, `descripcion`, `id_categor
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `rol` varchar(20) NOT NULL DEFAULT 'usuario',
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -87,9 +112,11 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `email`, `password`) VALUES
-(1, 'pirula@gmail.com', '$2y$10$fx0OfWHOP.pY6JKWEWrFVO4t3Bh.0YVAr7y2a8j1iOTICaPA47deK'),
-(2, 'matias@gmail.com', '$2y$10$7D9z7EQkAaZCWaHkXl9wyOjyIInm2S9/h0Cmk1htjr4kxtYdARsAC');
+INSERT INTO `usuarios` (`id`, `email`, `rol`, `password`) VALUES
+(2, 'ariel@hotmail.com', 'admin', '$2y$10$7D9z7EQkAaZCWaHkXl9wyOjyIInm2S9/h0Cmk1htjr4kxtYdARsAC'),
+(3, 'matias@gmail.com', 'admin', '$2y$10$kjux6H6CrRGFqLdHU/83mex.LHAwPQbAl3a6MK2ItpfUPJBW14iHu'),
+(4, 'arielito@hotmail.com', 'usuario', '$2y$10$lXoJEZtLxYgugW0ZlgYmuesEok7LMJMRahb9gvYVhXMQL3oBxLEZC'),
+(5, 'pirula@gmail.com', 'usuario', '$2y$10$OnsN/0k9CJLpY/oYJil5.uRL6gqXCIgUgxHU394usf.X38tMGWBnm');
 
 --
 -- Índices para tablas volcadas
@@ -100,6 +127,14 @@ INSERT INTO `usuarios` (`id`, `email`, `password`) VALUES
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `FK_id_juego` (`fk_id_juego`),
+  ADD KEY `FK_id_usuario` (`fk_id_usuario`);
 
 --
 -- Indices de la tabla `juegos`
@@ -122,7 +157,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
@@ -134,11 +175,18 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comentarios_ibfk_3` FOREIGN KEY (`fk_id_juego`) REFERENCES `juegos` (`id_juego`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `juegos`
