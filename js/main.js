@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     cargarComentarios();
     agregaListenerFormComentarios();
+    agregaListenersOrdenamientos();
 });
 
 const API_URL = "http://localhost/proyectos/WEB%202/tpeParte1/TPE-Web2/api/comentarios/";
@@ -37,6 +38,21 @@ async function getComentariosApiPorJuego(idJuego) {
     }
 }
 
+async function getComentariosApiOrdenados(idJuego, columna, criterio){
+    try {
+        let response = await fetch(API_URL + `/juegos/${idJuego}/${columna}/${criterio}`);
+        if (response.ok){
+            return await response.json();
+        }else {
+            console.log(`Hubo un error con codigo ${response.status}`);
+            //return [];
+        }
+    } catch (error) {
+        console.log(error);
+        //return [];
+    }
+}
+
 function agregaListenerFormComentarios(){
     let form = document.querySelector(".form-comentarios");
     if (form){
@@ -45,6 +61,21 @@ function agregaListenerFormComentarios(){
             actionFormComentarios();
         })
     }
+}
+
+function agregaListenersOrdenamientos(){
+    document.querySelector("#btn-fecha-asc").addEventListener("click", ()=>{
+        cargarComentariosOrdenados("fecha", "asc");
+    });
+    document.querySelector("#btn-fecha-desc").addEventListener("click", ()=>{
+        cargarComentariosOrdenados("fecha", "desc");
+    });
+    document.querySelector("#btn-puntaje-asc").addEventListener("click", ()=>{
+        cargarComentariosOrdenados("puntaje", "asc");
+    });
+    document.querySelector("#btn-puntaje-desc").addEventListener("click", ()=>{
+        cargarComentariosOrdenados("puntaje", "desc");
+    });
 }
 
 async function imprimeArreglo(){
@@ -57,6 +88,21 @@ async function imprimeArreglo(){
     }
 
     console.log(prueba[0].email_usuario);
+}
+
+async function cargarComentariosOrdenados(columna, criterio){
+    let containerMensajes = document.querySelector(".comment-widgets");
+    containerMensajes.innerHTML = "";
+    let link = document.querySelector("#link-juego");
+    let comentarios = await getComentariosApiOrdenados(link.dataset.idJuego, columna, criterio);
+
+    if (comentarios.length){
+        imprimeComentarios(comentarios);
+    }
+
+    // Agrego los listeners para los botones borrar
+    let botonesBorrar = document.querySelectorAll(".btn-borrar-comentario");
+    agregaListenersBorrar(botonesBorrar);
 }
 
 async function cargarComentarios(){

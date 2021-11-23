@@ -360,3 +360,8 @@ body{
     display: flex;
     padding: 0px;
 }
+
+.card-body > button {
+    margin: 0px;
+    margin-bottom: 10px;
+}

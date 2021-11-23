@@ -27,6 +27,12 @@
         <div class="card comentarios-card">
         <div class="card-body text-center">
             <h4 class="card-title">Comentarios</h4>
+            <h6 class="card-title">Orden Antiguedad</h6>
+            <button class="btn send btn-sm" id="btn-fecha-asc" data-id-juego="{$juego->id_juego}">Ascendente </button>
+            <button class="btn send btn-sm" id="btn-fecha-desc" data-id-juego="{$juego->id_juego}">Descendente </button>
+            <h6 class="card-title">Orden Puntaje</h6>
+            <button class="btn send btn-sm" id="btn-puntaje-asc" data-id-juego="{$juego->id_juego}">Ascendente </button>
+            <button class="btn send btn-sm" id="btn-puntaje-desc" data-id-juego="{$juego->id_juego}">Descendente </button>
         </div>
         <div class="comment-widgets">
 
@@ -79,7 +85,7 @@
                                     
                                     <div class="col-6">
                                         <div class="pull-right">
-                                            <button class="btn btn-success send btn-sm">Send <i class="fa fa-long-arrow-right ml-1"></i></button>
+                                            <button class="btn send btn-sm">Send <i class="fa fa-long-arrow-right ml-1"></i></button>
                                         </div>
                                     </div>
                                 </div>
