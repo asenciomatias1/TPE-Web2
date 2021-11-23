@@ -37,16 +37,27 @@
 
         function getComentariosAntiguedad($params = null){
             $idJuego = $params[":ID"];
-            $valorOrden = strtolower($params[":ORDEN"]);
-            $comentarios = $this->model->getComentariosAntiguedad($idJuego, $valorOrden);
-            return $this->view->response($comentarios, 200);
+            $valorOrden = strtoupper($params[":ORDEN"]);
+
+            if (is_string($valorOrden) && ($valorOrden == "ASC" || $valorOrden == "DESC")){
+                $comentarios = $this->model->getComentariosAntiguedad($idJuego, $valorOrden);
+                return $this->view->response($comentarios, 200);
+            }else {
+                return $this->view->response("El criterio de orden no existe", 404);
+            }
         }
 
         function getComentariosPuntaje($params = null){
             $idJuego = $params[":ID"];
-            $valorOrden = strtolower($params[":ORDEN"]);
-            $comentarios = $this->model->getComentariosPuntaje($idJuego, $valorOrden);
-            return $this->view->response($comentarios, 200);
+            $valorOrden = strtoupper($params[":ORDEN"]);
+            
+            if (is_string($valorOrden) && ($valorOrden == "ASC" || $valorOrden == "DESC")){
+                $comentarios = $this->model->getComentariosPuntaje($idJuego, $valorOrden);
+                return $this->view->response($comentarios, 200);
+            }else {
+                return $this->view->response("El criterio de orden no existe", 404);
+            }
+            
         }
 
         function getComentariosPorRating($params = null){

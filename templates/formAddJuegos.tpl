@@ -39,7 +39,7 @@
                     required="required" name="descripcionJuego">
 
                     <p>
-                        <select name="categoriaJuego">
+                        <select class="form-select form-select-sm" name="categoriaJuego">
                             {foreach from=$categorias item=$categoria}
                                 <option value="{$categoria->nombre}">{$categoria->nombre}</option>
                             {/foreach}

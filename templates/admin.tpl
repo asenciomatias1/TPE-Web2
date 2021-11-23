@@ -16,7 +16,7 @@
 
             <p><a href="home">Volver al Home</a></p>
 
-            <p><a href="admin/permisos">Editar permisos</a></p>
+            <p><a href="admin/permisos">Editar permisos de usuarios</a></p>
 
             <p><a href="logout">Logout</a></p>   
 

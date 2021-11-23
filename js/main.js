@@ -56,7 +56,7 @@ async function getComentariosApiOrdenados(idJuego, columna, criterio){
 
 async function getComentariosFiltrados(idJuego, puntaje){
     try {
-        let response = await fetch(API_URL + `/juegos/${idJuego}/filtroPuntaje/${puntaje}`);
+        let response = await fetch(API_URL + `/juegos/${idJuego}/filtro/puntaje/${puntaje}`);
         if (response.ok){
             return await response.json();
         }else {
