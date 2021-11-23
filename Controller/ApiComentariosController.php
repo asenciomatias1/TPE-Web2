@@ -49,6 +49,13 @@
             return $this->view->response($comentarios, 200);
         }
 
+        function getComentariosPorRating($params = null){
+            $idJuego = $params[":ID"];
+            $rating = $params[":RATING"];
+            $comentarios = $this->model->getComentariosPorRating($idJuego, $rating);
+            return $this->view->response($comentarios, 200);
+        }
+
         function postComentario(){
             $body = $this->getData(); // parsea la data raw a JSON objec
 

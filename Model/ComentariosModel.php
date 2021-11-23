@@ -123,4 +123,20 @@
                 return [];
             }
         }
+
+        function getComentariosPorRating($idJuego, $puntaje){
+            $query = $this->db->prepare(
+                "SELECT comentarios.*,
+                usuarios.email AS email_usuario
+                FROM comentarios
+                JOIN usuarios
+                ON comentarios.fk_id_usuario = usuarios.id
+                JOIN juegos
+                ON comentarios.fk_id_juego = juegos.id_juego
+                WHERE fk_id_juego = ?
+                AND puntaje = ?");
+
+            $query->execute(array($idJuego, $puntaje));
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        }
     }

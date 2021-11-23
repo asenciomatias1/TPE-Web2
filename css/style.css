@@ -365,3 +365,7 @@ body{
     margin: 0px;
     margin-bottom: 10px;
 }
+
+.btn-active {
+    background-color: #f4846a;
+}

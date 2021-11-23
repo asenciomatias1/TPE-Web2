@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     cargarComentarios();
     agregaListenerFormComentarios();
     agregaListenersOrdenamientos();
+    agregarListenersFiltrado();
 });
 
 const API_URL = "http://localhost/proyectos/WEB%202/tpeParte1/TPE-Web2/api/comentarios/";
@@ -53,6 +54,21 @@ async function getComentariosApiOrdenados(idJuego, columna, criterio){
     }
 }
 
+async function getComentariosFiltrados(idJuego, puntaje){
+    try {
+        let response = await fetch(API_URL + `/juegos/${idJuego}/filtroPuntaje/${puntaje}`);
+        if (response.ok){
+            return await response.json();
+        }else {
+            console.log(`Hubo un error con codigo ${response.status}`);
+            //return [];
+        }
+    } catch (error) {
+        console.log(error);
+        //return [];
+    }
+}
+
 function agregaListenerFormComentarios(){
     let form = document.querySelector(".form-comentarios");
     if (form){
@@ -63,18 +79,66 @@ function agregaListenerFormComentarios(){
     }
 }
 
+function agregarListenersFiltrado(){
+    let puntaje1 = document.querySelector("#btn-rating-1");
+    let puntaje2 = document.querySelector("#btn-rating-2");
+    let puntaje3 = document.querySelector("#btn-rating-3");
+    let puntaje4 = document.querySelector("#btn-rating-4");
+    let puntaje5 = document.querySelector("#btn-rating-5");
+
+    puntaje1.addEventListener("click", ()=>{
+        cargarComentariosFiltrados(1);
+        puntaje1.classList.toggle("btn-active");
+    });
+
+    puntaje2.addEventListener("click", ()=>{
+        cargarComentariosFiltrados(2);
+        puntaje2.classList.toggle("btn-active");
+    });
+
+    puntaje3.addEventListener("click", ()=>{
+        cargarComentariosFiltrados(3);
+        puntaje3.classList.toggle("btn-active");
+    });
+
+    puntaje4.addEventListener("click", ()=>{
+        cargarComentariosFiltrados(4);
+        puntaje4.classList.toggle("btn-active");
+    });
+
+    puntaje5.addEventListener("click", ()=>{
+        cargarComentariosFiltrados(5);
+        puntaje5.classList.toggle("btn-active");
+    });
+}
+
 function agregaListenersOrdenamientos(){
-    document.querySelector("#btn-fecha-asc").addEventListener("click", ()=>{
+    let btnFechaAsc = document.querySelector("#btn-fecha-asc");
+    
+    btnFechaAsc.addEventListener("click", ()=>{
         cargarComentariosOrdenados("fecha", "asc");
+        btnFechaAsc.classList.toggle("btn-active");
     });
-    document.querySelector("#btn-fecha-desc").addEventListener("click", ()=>{
+
+    let btnFechaDesc = document.querySelector("#btn-fecha-desc");
+    
+    btnFechaDesc.addEventListener("click", ()=>{
         cargarComentariosOrdenados("fecha", "desc");
+        btnFechaDesc.classList.toggle("btn-active");
     });
-    document.querySelector("#btn-puntaje-asc").addEventListener("click", ()=>{
+
+    let btnPuntajeAsc = document.querySelector("#btn-puntaje-asc");
+    
+    btnPuntajeAsc.addEventListener("click", ()=>{
         cargarComentariosOrdenados("puntaje", "asc");
+        btnPuntajeAsc.classList.toggle("btn-active");
     });
-    document.querySelector("#btn-puntaje-desc").addEventListener("click", ()=>{
+
+    let btnPuntajeDesc = document.querySelector("#btn-puntaje-desc");
+    
+    btnPuntajeDesc.addEventListener("click", ()=>{
         cargarComentariosOrdenados("puntaje", "desc");
+        btnPuntajeDesc.classList.toggle("btn-active");
     });
 }
 
@@ -88,6 +152,21 @@ async function imprimeArreglo(){
     }
 
     console.log(prueba[0].email_usuario);
+}
+
+async function cargarComentariosFiltrados(puntaje){
+    let containerMensajes = document.querySelector(".comment-widgets");
+    containerMensajes.innerHTML = "";
+    let link = document.querySelector("#link-juego");
+    let comentarios = await getComentariosFiltrados(link.dataset.idJuego, puntaje);
+
+    if (comentarios.length){
+        imprimeComentarios(comentarios);
+    }
+
+    // Agrego los listeners para los botones borrar
+    let botonesBorrar = document.querySelectorAll(".btn-borrar-comentario");
+    agregaListenersBorrar(botonesBorrar);
 }
 
 async function cargarComentariosOrdenados(columna, criterio){
@@ -166,7 +245,6 @@ function creaComentario(comentario){
 
     let mensaje = document.createElement('div');
     let puntajeHtml = calculaStringPuntaje(comentario.puntaje);
-    console.log(puntajeHtml);
 
     if (estaLogeado === "true" && esAdmin === "true"){
         mensaje.innerHTML = `<div class="d-flex flex-row comment-row m-t-0">

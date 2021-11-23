@@ -28,11 +28,17 @@
         <div class="card-body text-center">
             <h4 class="card-title">Comentarios</h4>
             <h6 class="card-title">Orden Antiguedad</h6>
-            <button class="btn send btn-sm" id="btn-fecha-asc" data-id-juego="{$juego->id_juego}">Ascendente </button>
+            <button class="btn send btn-sm active" id="btn-fecha-asc" data-id-juego="{$juego->id_juego}">Ascendente </button>
             <button class="btn send btn-sm" id="btn-fecha-desc" data-id-juego="{$juego->id_juego}">Descendente </button>
             <h6 class="card-title">Orden Puntaje</h6>
             <button class="btn send btn-sm" id="btn-puntaje-asc" data-id-juego="{$juego->id_juego}">Ascendente </button>
             <button class="btn send btn-sm" id="btn-puntaje-desc" data-id-juego="{$juego->id_juego}">Descendente </button>
+            <h6 class="card-title">Filtrar comentarios</h6>
+            <button class="btn send btn-sm" id="btn-rating-1" data-id-juego="{$juego->id_juego}">★ </button>
+            <button class="btn send btn-sm" id="btn-rating-2" data-id-juego="{$juego->id_juego}">★★ </button>
+            <button class="btn send btn-sm" id="btn-rating-3" data-id-juego="{$juego->id_juego}">★★★ </button>
+            <button class="btn send btn-sm" id="btn-rating-4" data-id-juego="{$juego->id_juego}">★★★★ </button>
+            <button class="btn send btn-sm" id="btn-rating-5" data-id-juego="{$juego->id_juego}">★★★★★ </button>
         </div>
         <div class="comment-widgets">
 
