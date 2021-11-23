@@ -64,4 +64,63 @@
             $query->execute(array($idJuego));
             return $query->fetchAll(PDO::FETCH_OBJ);
         }
+
+        function getComentariosAntiguedad($idJuego, $criterio){
+            if ($criterio == "desc"){
+                $query = $this->db->prepare(
+                    "SELECT comentarios.*,
+                    usuarios.email AS email_usuario
+                    FROM comentarios
+                    JOIN usuarios
+                    ON comentarios.fk_id_usuario = usuarios.id
+                    JOIN juegos
+                    ON comentarios.fk_id_juego = juegos.id_juego
+                    WHERE fk_id_juego = ?
+                    ORDER BY id_comentario
+                    DESC"
+                );
+                $query->execute(array($idJuego));
+                return $query->fetchAll(PDO::FETCH_OBJ);
+            }else if ($criterio == "asc"){
+                return $this->getComentariosPorJuego($idJuego);
+            }else {
+                return [];
+            }
+        }
+
+        function getComentariosPuntaje($idJuego, $criterio){
+            if ($criterio == "desc"){
+                $query = $this->db->prepare(
+                    "SELECT comentarios.*,
+                    usuarios.email AS email_usuario
+                    FROM comentarios
+                    JOIN usuarios
+                    ON comentarios.fk_id_usuario = usuarios.id
+                    JOIN juegos
+                    ON comentarios.fk_id_juego = juegos.id_juego
+                    WHERE fk_id_juego = ?
+                    ORDER BY puntaje
+                    DESC"
+                );
+                $query->execute(array($idJuego));
+                return $query->fetchAll(PDO::FETCH_OBJ);
+            }else if ($criterio == "asc"){
+                $query = $this->db->prepare(
+                    "SELECT comentarios.*,
+                    usuarios.email AS email_usuario
+                    FROM comentarios
+                    JOIN usuarios
+                    ON comentarios.fk_id_usuario = usuarios.id
+                    JOIN juegos
+                    ON comentarios.fk_id_juego = juegos.id_juego
+                    WHERE fk_id_juego = ?
+                    ORDER BY puntaje
+                    ASC"
+                );
+                $query->execute(array($idJuego));
+                return $query->fetchAll(PDO::FETCH_OBJ);
+            }else {
+                return [];
+            }
+        }
     }

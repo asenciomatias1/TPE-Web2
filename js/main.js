@@ -146,7 +146,14 @@ function creaComentario(comentario){
 
                             <div class="comment-text w-100">
                                 <h6 class="font-medium nombre-usuario">${comentario.email_usuario} dice:</h6>
-                                <span class="m-b-15 d-block">${comentario.mensaje}</span>
+                                <div class="rating-mensaje">
+                                    <div class="rating-box">
+                                        ${puntajeHtml}
+                                    </div>
+                                    <div class="mensaje-box">
+                                        <p class="m-b-15 d-block">${comentario.mensaje}</p>
+                                    </div>
+                                </div>
                                 
                             </div>
 

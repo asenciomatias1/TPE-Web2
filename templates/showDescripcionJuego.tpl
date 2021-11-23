@@ -30,7 +30,7 @@
         </div>
         <div class="comment-widgets">
 
-            <div class="d-flex flex-row comment-row m-t-0">
+            {* <div class="d-flex flex-row comment-row m-t-0">
 
                 <div class="comment-text w-100">
                     <h6 class="font-medium nombre-usuario">matias@gmail.com dice:</h6>
@@ -53,7 +53,7 @@
                     {/if}
                 </div>
 
-            </div>
+            </div> *}
             
         </div>
     </div>

@@ -35,6 +35,20 @@
             return $this->view->response($comentarios, 200);
         }
 
+        function getComentariosAntiguedad($params = null){
+            $idJuego = $params[":ID"];
+            $valorOrden = strtolower($params[":ORDEN"]);
+            $comentarios = $this->model->getComentariosAntiguedad($idJuego, $valorOrden);
+            return $this->view->response($comentarios, 200);
+        }
+
+        function getComentariosPuntaje($params = null){
+            $idJuego = $params[":ID"];
+            $valorOrden = strtolower($params[":ORDEN"]);
+            $comentarios = $this->model->getComentariosPuntaje($idJuego, $valorOrden);
+            return $this->view->response($comentarios, 200);
+        }
+
         function postComentario(){
             $body = $this->getData(); // parsea la data raw a JSON objec
 

@@ -31,7 +31,10 @@
         function showDescripcionJuego($id){
             $juego = $this->model->getJuego($id);
             $estaLogeado = $this->authHelper->estaLogeado();
-            $esAdmin = $this->authHelper->esAdmin();
+            $esAdmin = false;
+            if ($estaLogeado){
+                $esAdmin = $this->authHelper->esAdmin();
+            }
             $idUsuario = $this->authHelper->idUsuarioLogeado();
             $this->view->showDescripcionJuego($juego, $estaLogeado, $esAdmin, $idUsuario);
         }

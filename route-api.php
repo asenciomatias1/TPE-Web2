@@ -37,6 +37,8 @@ $router->addRoute('comentarios/:ID', 'GET', 'ApiComentariosController', 'getCome
 $router->addRoute('comentarios/juegos/:ID', 'GET', 'ApiComentariosController', 'getComentariosPorJuego');
 $router->addRoute('comentarios/:ID', 'DELETE', 'ApiComentariosController', 'deleteComentario');
 $router->addRoute('comentarios', 'POST', 'ApiComentariosController', 'postComentario');
+$router->addRoute('comentarios/juegos/:ID/fecha/:ORDEN', 'GET', 'ApiComentariosController', 'getComentariosAntiguedad');
+$router->addRoute('comentarios/juegos/:ID/puntaje/:ORDEN', 'GET', 'ApiComentariosController', 'getComentariosPuntaje');
 
 //$router->addRoute('vuelos/:ID', 'DELETE', 'ApiTaskController', 'eliminarTarea');
 //$router->addRoute('vuelos', 'POST', 'ApiTaskController', 'insertarTarea');

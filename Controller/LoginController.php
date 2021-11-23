@@ -82,4 +82,7 @@
             $this->view->showLogin("Te deslogueaste!");
         }
     
+        function showAdminSinPermiso(){
+            $this->view->showAdmin("No tenes permiso de realizar esta accion");
+        }
     }

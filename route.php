@@ -108,26 +108,30 @@
                         $juegosController->formAddJuegos($categoriasController->getCategorias());
                     }
                 }else if($params[1] == 'permisos'){
-                    if (!empty($params[2])){
-                        switch ($params[2]) {
-                            case 'editar':
-                                //admin/permisos/editar/id me lleva a la interfaz para editar un usuario
-                                //$usuarioController->updatePermisosInterfaz();
-                                $usuarioController->editarRol();
-                                break;
-                            case 'borrar':
-                                if (!empty($params[3])){
-                                    $usuarioController->borrarUsuario($params[3]);
-                                }else {
+                    if ($authHelper->esAdmin()) {
+                        if (!empty($params[2])){
+                            switch ($params[2]) {
+                                case 'editar':
+                                    //admin/permisos/editar/id me lleva a la interfaz para editar un usuario
+                                    //$usuarioController->updatePermisosInterfaz();
+                                    $usuarioController->editarRol();
+                                    break;
+                                case 'borrar':
+                                    if (!empty($params[3])){
+                                        $usuarioController->borrarUsuario($params[3]);
+                                    }else {
+                                        $usuarioController->updatePermisosInterfaz();
+                                    }
+                                    break;
+                                default:
                                     $usuarioController->updatePermisosInterfaz();
-                                }
-                                break;
-                            default:
-                                $usuarioController->updatePermisosInterfaz();
-                                break;
+                                    break;
+                            }
+                        }else{
+                            $usuarioController->updatePermisosInterfaz();
                         }
-                    }else{
-                        $usuarioController->updatePermisosInterfaz();
+                    } else {
+                        $loginController->showAdminSinPermiso();
                     }
                 }
             }else {
