@@ -77,7 +77,12 @@
 
         function formEditJuegos($nombreJuego, $categorias){
             $juegos = $this->model->getJuegos();
-            $this->view->formEditJuegos($nombreJuego, $juegos, $categorias);
+            $juegoEditar = $this->model->getJuegoPorNombre($nombreJuego);
+            if ($juegoEditar){
+                $this->view->formEditJuegos($nombreJuego, $juegos, $categorias);
+            }else {
+                $this->view->showAdminJuegos();
+            }
         }
 
     }

@@ -21,6 +21,13 @@
             return $juego;
         }
 
+        function getJuegoPorNombre($nombre){
+            $query = $this->db->prepare("SELECT * FROM `juegos` WHERE nombre = ?");
+            $query->execute(array($nombre));
+            $juego = $query->fetch(PDO::FETCH_OBJ);
+            return $juego;
+        }
+
         function getJuegosPorCategoria($categoria){
             $query = $this->db->prepare
             ("SELECT juegos.*, categorias.nombre as categoria 
