@@ -75,7 +75,9 @@
             $idJuego = $body->fk_id_juego;
             $idUsuario = $body->fk_id_usuario;
 
-            if (isset($mensaje, $puntaje, $idJuego, $idUsuario) && !empty($mensaje) && !empty($puntaje) && !empty($idJuego) && !empty($idUsuario)){
+            if (isset($mensaje, $puntaje, $idJuego, $idUsuario) && !empty($mensaje) 
+                && !empty($puntaje) && !empty($idJuego) && !empty($idUsuario)){
+                    
                 try {
                     $id = $this->model->addComentario($mensaje, $puntaje, $idJuego, $idUsuario);
                     if ($id != 0) {
