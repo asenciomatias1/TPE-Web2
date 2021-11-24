@@ -81,7 +81,7 @@
                                 <input type="radio" name="rating" value="4" id="4"><label for="4" required="required">☆</label>
                                 <input type="radio" name="rating" value="3" id="3"><label for="3" required="required">☆</label>
                                 <input type="radio" name="rating" value="2" id="2"><label for="2" required="required">☆</label>
-                                <input type="radio" name="rating" value="1" id="1"><label for="1" required="required">☆</label>
+                                <input type="radio" name="rating" value="1" id="1"><label for="1" required="required">★</label>
                             </div>
                             <div class="comment-area">
                                 <textarea class="form-control" name="mensaje-comentario" placeholder="¿Que pensas del juego?" rows="4" required="required"></textarea>
