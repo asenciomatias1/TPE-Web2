@@ -133,6 +133,8 @@
                     } else {
                         $loginController->showAdminSinPermiso();
                     }
+                }else {
+                    $loginController->showAdmin();
                 }
             }else {
                 //$authHelper->checkLogin();
