@@ -69,6 +69,8 @@
                 } else {
                     $this->view->showLogin("Acceso denegado");
                 }
+            }else {
+                $this->view->showLogin("Acceso denegado");
             }
         }
 
