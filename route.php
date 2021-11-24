@@ -143,10 +143,14 @@
             break;
         
         case 'registro':
-            if (!empty($params[1])){
-                $loginController->addUsuario();
+            if ($authHelper->estaLogeado()){
+                $loginController->showAdmin();
             }else {
-                $loginController->showRegistro();
+                if (!empty($params[1])){
+                    $loginController->addUsuario();
+                }else {
+                    $loginController->showRegistro();
+                }
             }
         break;
 
